@@ -1,0 +1,36 @@
+# compiler output
+build*/**
+
+# vscode settings
+.vscode/**
+
+# generated orams
+orams/**
+
+# temp files for simulation runs
+temp/**
+
+# sampled traces from kagle
+sampled_trace*.txt
+
+# python virtual env
+.venv/**
+
+# experiment folder
+experiments/**
+
+# generated outputs
+*.csv
+*.tar*
+*.png
+*.pdf
+*.toml
+
+# input traces
+input-traces/**
+
+# nohup outputs
+**/nohup.out
+
+# compiled python byte-code
+*.pyc
