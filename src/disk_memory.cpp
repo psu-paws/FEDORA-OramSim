@@ -12,7 +12,6 @@
 
 #include <sys/types.h>
 #include <aio.h>
-#include <errno.h>
 
 constexpr int file_mode = O_DIRECT | O_RDWR;
 
@@ -57,9 +56,9 @@ DiskMemory::create(std::string_view name,uint64_t size) {
 
     // create the temp file and fill with zeros
     int temp_file_fd = open(temp_file_path.c_str(), O_CREAT | O_RDWR, 0644);
-
+    
     if (fallocate(temp_file_fd, FALLOC_FL_ZERO_RANGE, 0, size)) {
-        throw std::runtime_error("Fallocate failed!");
+        throw std::runtime_error(absl::StrFormat("Fallocate failed with errno %d: %s", errno, strerror(errno)));
     }
 
     close(temp_file_fd);
@@ -288,7 +287,7 @@ BlockDiskMemory::create(std::string_view name,uint64_t size) {
     int temp_file_fd = open(temp_file_path.c_str(), O_CREAT | O_RDWR, 0644);
 
     if (fallocate(temp_file_fd, FALLOC_FL_ZERO_RANGE, 0, size)) {
-        throw std::runtime_error("Fallocate failed!");
+        throw std::runtime_error(absl::StrFormat("Fallocate failed with errno %d: %s", errno, strerror(errno)));
     }
 
     close(temp_file_fd);
@@ -473,7 +472,7 @@ BlockDiskMemoryLibAIO::create(std::string_view name, uint64_t size, std::optiona
     int temp_file_fd = open(temp_file_path.c_str(), O_CREAT | O_RDWR, 0644);
 
     if (fallocate(temp_file_fd, FALLOC_FL_ZERO_RANGE, 0, size)) {
-        throw std::runtime_error("Fallocate failed!");
+        throw std::runtime_error(absl::StrFormat("Fallocate failed with errno %d: %s", errno, strerror(errno)));
     }
 
     close(temp_file_fd);
@@ -746,7 +745,7 @@ BlockDiskMemoryLibAIOCached::create(std::string_view name, uint64_t size, uint64
     int temp_file_fd = open(temp_file_path.c_str(), O_CREAT | O_RDWR, 0644);
 
     if (fallocate(temp_file_fd, FALLOC_FL_ZERO_RANGE, 0, size)) {
-        throw std::runtime_error("Fallocate failed!");
+        throw std::runtime_error(absl::StrFormat("Fallocate failed with errno %d: %s", errno, strerror(errno)));
     }
 
     close(temp_file_fd);
