@@ -124,7 +124,7 @@ def main():
                 "--sample_file", str(trace_file),
                 "--buffer", buffer_type,
                 f"--unsafe_optimization={enable_unsafe}",
-                "--temp_dir", "/data2",
+                "--temp_dir", ORAM_WORKING_DIR,
                 "--output_file", run_folder/ f"recsys_sim-stat.toml",
                 "--epsilon", str(epsilon),
                 "--k_union", "16Ki"
