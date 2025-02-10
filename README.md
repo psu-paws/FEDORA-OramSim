@@ -10,6 +10,7 @@ Running FEDORA requires a modern x86-64 CPU with AVX2 support and an NVME SSD.
  - GCC with C++20 support and CMake
  - Python 3.10
  - LibSodium
+ - LibAIO
 
 The program was tested in the following environment:
  - Ubuntu 22.04.5 LTS
