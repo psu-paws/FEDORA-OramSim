@@ -508,7 +508,7 @@ BlockDiskMemoryLibAIO::create_second_stage(std::string_view name, std::filesyste
     io_context_t io_context = nullptr;
     int ret_value = io_setup(max_events, &io_context);
      if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_setup failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_setup failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     uint64_t unwrapped_page_size = page_size.value_or(file_stat.st_blksize);
@@ -638,13 +638,13 @@ BlockDiskMemoryLibAIO::batch_access(std::vector<MemoryRequest> &requests) {
 
     int ret_value = io_submit(this->io_context, requests.size(), this->io_control_block_pointers.data());
     if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_submit failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_submit failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     // wait for completion
     ret_value = io_getevents(this->io_context, requests.size(), requests.size(), this->io_events.data(), NULL);
     if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_getevents failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_getevents failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     std::size_t fail_count = 0;
@@ -782,7 +782,7 @@ BlockDiskMemoryLibAIOCached::create_second_stage(std::string_view name, std::fil
     io_context_t io_context = nullptr;
     int ret_value = io_setup(max_events, &io_context);
      if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_setup failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_setup failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     uint64_t unwrapped_page_size = page_size.value_or(file_stat.st_blksize);
@@ -937,13 +937,13 @@ BlockDiskMemoryLibAIOCached::batch_access(std::vector<MemoryRequest> &requests) 
 
     int ret_value = io_submit(this->io_context, io_control_block_offset, this->io_control_block_pointers.data());
     if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_submit failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_submit failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     // wait for completion
     ret_value = io_getevents(this->io_context, io_control_block_offset, io_control_block_offset, this->io_events.data(), NULL);
     if (ret_value < 0 ){
-        throw std::runtime_error(absl::StrFormat("io_getevents failed with code %d: %s: %s", -ret_value, strerrorname_np(-ret_value), strerrordesc_np(-ret_value)));
+        throw std::runtime_error(absl::StrFormat("io_getevents failed with code %d: %s", -ret_value, strerror(-ret_value)));
     }
 
     std::size_t fail_count = 0;
