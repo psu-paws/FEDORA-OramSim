@@ -54,8 +54,8 @@ This command will run 1M uniformly random accesses on the specified ORAM. Toml f
 
 ## Citation
 
-Jinyu Liu, Wenjie Xiong, G. Edward Suh, and Kiwan Maeng. 2025. Practical Federated Recommendation Model Learning Using ORAM with Controlled Privacy. In Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2 (ASPLOS ’25), March 30-
-April 3, 2025, Rotterdam, Netherlands. ACM, New York, NY, USA,
+Jinyu Liu, Wenjie Xiong, G. Edward Suh, and Kiwan Maeng. 2025. Practical Federated Recommendation Model Learning Using ORAM with Controlled Privacy. In *Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2 (ASPLOS ’25), March 30-
+April 3, 2025, Rotterdam, Netherlands.* ACM, New York, NY, USA,
 20 pages. https://doi.org/10.1145/3676641.3716014
 
 ```
